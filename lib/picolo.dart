@@ -1,44 +1,56 @@
 library picolo;
 
 import 'package:flutter/material.dart';
-import 'package:picolo/src/models/picker_item.dart';
-import 'package:picolo/src/widgets/dialog.dart';
+import 'package:picolo/src/constants/keys.dart';
 
-export 'package:picolo/src/models/picker_item.dart';
+import 'package:picolo/src/controllers/picolo_controller.dart';
+import 'package:picolo/src/models/picolo_item.dart';
+import 'package:picolo/src/widgets/context.dart';
+import 'package:picolo/src/widgets/picker.dart';
 
-class Picolo<T> {
-  const Picolo({
+export 'package:picolo/src/controllers/picolo_controller.dart';
+export 'package:picolo/src/models/picolo_item.dart';
+
+class Picolo<T> extends StatelessWidget {
+  Picolo({
+    super.key,
     required this.items,
-    required this.onSelect,
-    this.dialogBorderRadius = const BorderRadius.all(Radius.circular(12.0)),
-    this.itemPadding = const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+    this.customPicker,
+    this.itemSelectedColor,
     this.onClosed,
-    this.selectedValue,
-  });
+    this.onSelect,
+    this.pickerInputDecoration,
+    PicoloController<T>? controller,
+    BorderRadius? dialogBorderRadius,
+    EdgeInsets? itemPadding,
+    T? initialValue,
+  })  : controller = controller ?? PicoloController<T>(initialValue),
+        dialogBorderRadius = dialogBorderRadius ?? const BorderRadius.all(Radius.circular(12.0)),
+        itemPadding = itemPadding ?? const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0);
 
+  final PicoloController<T> controller;
   final BorderRadius dialogBorderRadius;
-  final List<PickerItem<T>> items;
+  final List<PicoloItem<T>> items;
   final EdgeInsets itemPadding;
-  final void Function(T) onSelect;
+  final Widget? customPicker;
+  final Color? itemSelectedColor;
   final void Function()? onClosed;
-  final T? selectedValue;
+  final void Function(T)? onSelect;
+  final InputDecoration? pickerInputDecoration;
 
-  show({
-    required BuildContext context,
-  }) {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      builder: (context) => PicoloDialog(
-        borderRadius: dialogBorderRadius,
-        items: items,
-        itemPadding: itemPadding,
-        onSelect: onSelect,
-        selectedValue: selectedValue,
-      ),
-    ).whenComplete(() {
-      onClosed?.call();
-    });
+  @override
+  Widget build(BuildContext context) {
+    return PicoloContext<T>(
+      controller: controller,
+      customPicker: customPicker,
+      dialogBorderRadius: dialogBorderRadius,
+      items: items,
+      itemPadding: itemPadding,
+      itemSelectedColor: itemSelectedColor ?? Theme.of(context).primaryColor,
+      onClosed: onClosed,
+      onSelect: onSelect,
+      pickerInputDecoration: pickerInputDecoration,
+      child: PicoloPicker<T>(key: PicoloKeys.globalKey),
+    );
   }
 }

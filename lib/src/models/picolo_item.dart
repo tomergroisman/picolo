@@ -1,5 +1,5 @@
-class PickerItem<T> {
-  PickerItem({
+class PicoloItem<T> {
+  PicoloItem({
     required this.label,
     required this.value,
   });

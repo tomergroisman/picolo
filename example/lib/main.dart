@@ -21,28 +21,54 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final PicoloController<num> picoloController = PicoloController();
+  num? selectedValue;
+
+  @override
+  void initState() {
+    selectedValue = picoloController.selectedValue;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Picolo<num>(
-              items: [
-                PickerItem(label: 'One', value: 1),
-                PickerItem(label: 'Two', value: 2),
-                PickerItem(label: 'Three', value: 3),
-              ],
-              selectedValue: 1,
-              onSelect: (value) {
-                print('Value changed: $value');
-              },
-            ).show(context: context);
-          },
-          child: const Text('Open Picker'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: 200,
+              child: Picolo<num>(
+                items: [
+                  PicoloItem(label: 'One', value: 1),
+                  PicoloItem(label: 'Two', value: 2),
+                  PicoloItem(label: 'Three', value: 3),
+                ],
+                controller: picoloController,
+                onSelect: (value) {
+                  setState(() {
+                    selectedValue = value;
+                  });
+                },
+                pickerInputDecoration: const InputDecoration(
+                  label: Text("Test Picker"),
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            ),
+            const SizedBox(height: 8.0),
+            Text('Picked Value (Controller): ${picoloController.selectedValue}'),
+            Text('Picked Value (Local State): $selectedValue'),
+          ],
         ),
       ),
     );

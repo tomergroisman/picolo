@@ -1,7 +1,6 @@
 name: picolo
 description: "Picker component for Flutter applications."
 version: 1.0.0
-homepage:
 
 environment:
   sdk: '>=3.2.1 <4.0.0'
@@ -18,3 +17,10 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
 flutter:
+
+scripts:
+  coverage:
+    test: flutter test --coverage
+    only: flutter test --tags only --coverage
+    generate: genhtml coverage/lcov.info -o coverage/html & derry coverage open
+    open: open coverage/html/index.html

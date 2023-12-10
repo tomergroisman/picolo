@@ -1,27 +1,15 @@
 import 'package:flutter/material.dart';
 
 import 'package:picolo/src/constants/keys.dart';
-import 'package:picolo/src/models/picker_item.dart';
-import 'package:picolo/src/widgets/item.dart';
+import 'package:picolo/src/widgets/context.dart';
+import 'package:picolo/src/widgets/picker_item.dart';
 
 class PicoloDialog<T> extends StatelessWidget {
-  const PicoloDialog({
-    super.key,
-    required this.borderRadius,
-    required this.onSelect,
-    required this.items,
-    required this.itemPadding,
-    this.selectedValue,
-  });
-
-  final BorderRadius borderRadius;
-  final void Function(T) onSelect;
-  final List<PickerItem<T>> items;
-  final EdgeInsets itemPadding;
-  final T? selectedValue;
+  const PicoloDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
+    PicoloContext<T> picoloContext = PicoloContext.get<T>();
     return Padding(
       padding: const EdgeInsets.only(bottom: 20.0),
       child: Wrap(
@@ -29,20 +17,15 @@ class PicoloDialog<T> extends StatelessWidget {
           Container(
             key: PicoloDialogKeys.container,
             decoration: BoxDecoration(
-              borderRadius: borderRadius,
+              borderRadius: picoloContext.dialogBorderRadius,
               color: Colors.white,
             ),
             child: Column(
-              children: items
+              children: picoloContext.items
                   .map(
-                    (it) => PicoloItem(
-                      borderRadius: borderRadius,
+                    (it) => PicoloPickerItem<T>(
                       item: it,
-                      isMultiSelect: false,
-                      isSelected: selectedValue == it.value,
-                      onSelect: onSelect,
-                      padding: itemPadding,
-                      selectedColor: Theme.of(context).primaryColor,
+                      isSelected: picoloContext.controller.selectedValue == it.value,
                     ),
                   )
                   .toList(),
