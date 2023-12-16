@@ -1,6 +1,7 @@
 name: picolo
 description: "Picker component for Flutter applications."
 version: 1.0.0
+repository: https://github.com/tomergroisman/picolo.git
 
 environment:
   sdk: '>=3.2.1 <4.0.0'
@@ -14,7 +15,7 @@ dev_dependencies:
   mockito: ^5.4.3
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
 
 flutter:
 

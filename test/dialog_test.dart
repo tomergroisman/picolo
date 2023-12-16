@@ -1,6 +1,4 @@
-import 'dart:math';
-
-import 'package:flutter/material.dart' show Color, Colors, EdgeInsets, ModalBarrier;
+import 'package:flutter/material.dart' show ModalBarrier;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
