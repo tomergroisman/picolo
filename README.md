@@ -1,39 +1,87 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Picolo Flutter Package
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
+Picolo is a versatile and customizable dialog picker for Flutter applications. It provides an easy-to-use widget that allows you to integrate a sleek and efficient picker dialog into your application with minimal effort. Whether you need a simple selection mechanism or a more complex picker, Picolo has you covered.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
+## Installation
+Add the following line to your `pubspec.yaml` file:
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+```yaml
+dependencies:
+  picolo: ^1.0.0
+```
+Then, run:
 
-## Features
-
-TODO: List what your package can do. Maybe include images, gifs, or videos.
-
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+```bash
+flutter pub get
 ```
 
-## Additional information
+## Usage
+Import the Picolo package:
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```dart
+import 'package:picolo/picolo.dart';
+```
+
+Use the Picolo widget in your Flutter app:
+
+```dart
+Picolo<T>(
+  dialogBorderRadius: BorderRadius.circular(8.0),
+  items: [
+    PicoloItem(label: 'One', value: 1),
+    PicoloItem(label: 'Two', value: 2),
+  ],
+  itemPadding: EdgeInsets.all(8.0),
+  removeSelectionOnReselect: true,
+  controller: PicoloController<T>(1),
+  customPicker: Text('Click me to open the picker!'),
+  itemSelectedColor: Colors.blue,
+  onClosed: () {
+  // Handle on dialog closed event
+  },
+  onSelect: (selectedValue) {
+  // Handle on item selected event
+  },
+  pickerInputDecoration: InputDecoration(
+    labelText: 'Select an item',
+    hintText: 'Tap to select',
+  ),
+);
+```
+
+## Widget Properties
+| Property                    | Required? | Type                  | Details                                                                                                    |
+|-----------------------------|-----------|-----------------------|------------------------------------------------------------------------------------------------------------|
+| `items`                     | Required  | `List<PicoloItem<T>>` | A list of `PicoloItem<T>` objects representing the items in the picker.                                    |
+| `controller`                |           | `PicoloController<T>` | A controller for more control over the picker's state.                                                     |
+| `customPicker`              |           | `Widget`              | A custom widget to replace the default picker.                                                             |
+| `dialogBorderRadius`        |           | `BorderRadius`        | The border radius of the picker dialog.                                                                    |
+| `initialValue`              |           | `T`                   | The initial value to display in the picker. Will be ignored if a controller with initial value is provided |
+| `itemPadding`               |           | `EdgeInsets`          | Padding applied to each item in the picker.                                                                |
+| `itemSelectedColor`         |           | `Color`               | The foreground color of the selected item.                                                                 |
+| `removeSelectionOnReselect` |           | `bool`                | A flag to determine whether to remove selection on reselection.                                            |
+| `onClosed`                  |           | `void Function()`     | A callback function invoked when the dialog is closed.                                                     |
+| `onSelect`                  |           | `void Function(T?)`   | A callback function invoked when an item is selected.                                                      |
+| `pickerInputDecoration`     |           | `InputDecoration`     | `InputDecoration` for styling the input field of the picker.                                               |
+
+## PicoloItem
+The `PicoloItem<T>` class represents an item in the picker. It has the following properties:
+
+* `label`: The display label for the item.
+* `value`: The value associated with the item.
+Example usage:
+
+```dart
+PicoloItem<int>(
+    label: 'One',
+    value: 1,
+)
+```
+
+## PicoloController
+The `PicoloController<T>` class provides control over the state of the picker. It can be used to set and retrieve the selected value. Example usage:
+
+```dart
+PicoloController<int> controller = PicoloController<int>(1);
+```
+
