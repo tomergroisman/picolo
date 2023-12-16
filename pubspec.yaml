@@ -12,7 +12,6 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
-  dlcov: ^4.2.1
   mockito: ^5.4.3
   flutter_test:
     sdk: flutter

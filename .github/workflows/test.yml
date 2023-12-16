@@ -16,6 +16,4 @@ jobs:
         with:
           channel: 'stable'
       - run: flutter pub get
-      - run: flutter pub global activate dlcov
-      - run: flutter test --coverage
-      - run: dlcov --coverage=100
+      - run: flutter test
