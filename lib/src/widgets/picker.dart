@@ -13,29 +13,33 @@ class PicoloPicker<T> extends StatefulWidget {
 }
 
 class _PicoloPickerState<T> extends State<PicoloPicker<T>> {
-  final TextEditingController textEditingController = TextEditingController();
+  late final TextEditingController textEditingController;
   late final PicoloController<T> picoloController;
-
-  @override
-  initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      picoloController = PicoloContext.get<T>().controller;
-      picoloController.addListener(_rebuild);
-    });
-    super.initState();
-  }
+  bool loaded = false;
 
   @override
   dispose() {
-    picoloController.removeListener(_rebuild);
+    picoloController.removeListener(updatePickerValue);
     super.dispose();
   }
 
-  _rebuild() {
-    setState(() {});
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (loaded) return;
+    loaded = true;
+    picoloController = PicoloContext.get<T>().controller;
+    picoloController.addListener(updatePickerValue);
+    textEditingController = TextEditingController(text: pickerValue);
   }
 
-  _show({required PicoloContext<T> picoloContext}) {
+  void updatePickerValue() {
+    setState(() {
+      textEditingController.text = pickerValue;
+    });
+  }
+
+  void show({required PicoloContext<T> picoloContext}) {
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
@@ -46,20 +50,23 @@ class _PicoloPickerState<T> extends State<PicoloPicker<T>> {
     });
   }
 
-  void updateTextEditingController(PicoloContext<T> picoloContext) {
+  String get pickerValue {
+    final PicoloContext<T> picoloContext = PicoloContext.get<T>();
     final PicoloController<T> picoloController = picoloContext.controller;
     final hasSelectedValue = picoloController.selectedValue != null;
     if (hasSelectedValue) {
-      textEditingController.text = picoloContext.labelByValue[picoloController.selectedValue]!;
+      return picoloContext.labelByValue[picoloController.selectedValue]!;
+    } else {
+      return '';
     }
   }
 
   @override
   Widget build(BuildContext context) {
     PicoloContext<T> picoloContext = PicoloContext.get<T>();
-    updateTextEditingController(picoloContext);
+
     handlePickerTap() {
-      _show(picoloContext: picoloContext);
+      show(picoloContext: picoloContext);
     }
 
     final bool shouldRenderCustomPicker = picoloContext.customPicker != null;

@@ -12,12 +12,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Picolo Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: const Home());
+      title: 'Picolo Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: const Home(),
+    );
   }
 }
 
@@ -48,7 +49,7 @@ class _HomeState extends State<Home> {
             SizedBox(
               width: 200,
               child: Picolo<num>(
-                items: [
+                items: const [
                   PicoloItem(label: 'One', value: 1),
                   PicoloItem(label: 'Two', value: 2),
                   PicoloItem(label: 'Three', value: 3),
@@ -63,6 +64,7 @@ class _HomeState extends State<Home> {
                   label: Text("Test Picker"),
                   border: OutlineInputBorder(),
                 ),
+                removeSelectionOnReselect: true,
               ),
             ),
             const SizedBox(height: 8.0),

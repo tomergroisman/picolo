@@ -1,5 +1,5 @@
 class PicoloItem<T> {
-  PicoloItem({
+  const PicoloItem({
     required this.label,
     required this.value,
   });
