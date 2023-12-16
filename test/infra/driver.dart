@@ -19,13 +19,14 @@ class PicoloTestDriver with PicoloTestFinders {
   EdgeInsets? _itemPadding;
   Color? _itemSelectedColor;
   InputDecoration? _pickerInputDecoration;
+  bool? _removeSelectionOnReselect;
   void Function()? _onClosed;
-  void Function(int)? _onSelect;
+  void Function(int?)? _onSelect;
 
   PicoloController<int>? get controller => _controller;
 
   PicoloTestDriver withPicker() {
-    _items = [
+    _items = const [
       PicoloItem(label: 'One', value: 1),
       PicoloItem(label: 'Two', value: 2),
     ];
@@ -40,14 +41,14 @@ class PicoloTestDriver with PicoloTestFinders {
   }
 
   PicoloTestDriver withSingleItemPicker() {
-    _items = [
+    _items = const [
       PicoloItem(label: 'One', value: 1),
     ];
     return this;
   }
 
   PicoloTestDriver withCustomPicker() {
-    _items = [
+    _items = const [
       PicoloItem(label: 'One', value: 1),
       PicoloItem(label: 'Two', value: 2),
     ];
@@ -85,21 +86,32 @@ class PicoloTestDriver with PicoloTestFinders {
     return this;
   }
 
+  PicoloTestDriver withRemoveSelectionOnReselect() {
+    _removeSelectionOnReselect = true;
+    return this;
+  }
+
   Future<PicoloTestDriver> pumpPicolo() async {
     await tester.pumpWidget(
       MaterialApp(
         home: Scaffold(
-          body: Picolo<int>(
-            controller: _controller,
-            customPicker: _customPicker,
-            dialogBorderRadius: _dialogBorderRadius,
-            initialValue: _initialValue,
-            items: _items,
-            itemPadding: _itemPadding,
-            itemSelectedColor: _itemSelectedColor,
-            onClosed: _onClosed,
-            onSelect: _onSelect,
-            pickerInputDecoration: _pickerInputDecoration,
+          body: StatefulBuilder(
+            builder: (_, StateSetter setState) => Picolo<int>(
+              controller: _controller,
+              customPicker: _customPicker,
+              dialogBorderRadius: _dialogBorderRadius,
+              initialValue: _initialValue,
+              items: _items,
+              itemPadding: _itemPadding,
+              itemSelectedColor: _itemSelectedColor,
+              onClosed: _onClosed,
+              onSelect: (payload) {
+                setState(() {});
+                _onSelect?.call(payload);
+              },
+              pickerInputDecoration: _pickerInputDecoration,
+              removeSelectionOnReselect: _removeSelectionOnReselect,
+            ),
           ),
         ),
       ),

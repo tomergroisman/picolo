@@ -172,6 +172,22 @@ void main() {
         expect(drv.pickerTextFieldWidget.controller!.text, 'One');
       });
 
+      testWidgets("should change the picker value on item selection when a controller provided", (tester) async {
+        drv = await PicoloTestDriver(tester) //
+            .withPicker()
+            .withController()
+            .pumpPicolo();
+
+        expect(drv.pickerTextFieldWidget.controller!.text, '');
+
+        await tester.tap(drv.pickerContainer);
+        await tester.pumpAndSettle();
+        await tester.tap(drv.pickerItemIndexContainer(0));
+        await tester.pumpAndSettle();
+
+        expect(drv.pickerTextFieldWidget.controller!.text, 'One');
+      });
+
       testWidgets("should change the controller's selected value field on item selection", (tester) async {
         drv = await PicoloTestDriver(tester) //
             .withPicker()
@@ -186,6 +202,72 @@ void main() {
         await tester.pumpAndSettle();
 
         expect(drv.controller!.selectedValue, 1);
+      });
+
+      testWidgets("should keep the picker value on item reselection", (tester) async {
+        drv = await PicoloTestDriver(tester) //
+            .withPicker()
+            .withController(1)
+            .pumpPicolo();
+
+        expect(drv.pickerTextFieldWidget.controller!.text, 'One');
+
+        await tester.tap(drv.pickerContainer);
+        await tester.pumpAndSettle();
+        await tester.tap(drv.pickerItemIndexContainer(0));
+        await tester.pumpAndSettle();
+
+        expect(drv.pickerTextFieldWidget.controller!.text, 'One');
+      });
+
+      testWidgets("should keep the controller's selected value field on item reselection", (tester) async {
+        drv = await PicoloTestDriver(tester) //
+            .withPicker()
+            .withController(1)
+            .pumpPicolo();
+
+        expect(drv.controller!.selectedValue, 1);
+
+        await tester.tap(drv.pickerContainer);
+        await tester.pumpAndSettle();
+        await tester.tap(drv.pickerItemIndexContainer(0));
+        await tester.pumpAndSettle();
+
+        expect(drv.controller!.selectedValue, 1);
+      });
+
+      testWidgets("should remove the picker value on item reselection", (tester) async {
+        drv = await PicoloTestDriver(tester) //
+            .withPicker()
+            .withController(1)
+            .withRemoveSelectionOnReselect()
+            .pumpPicolo();
+
+        expect(drv.pickerTextFieldWidget.controller!.text, 'One');
+
+        await tester.tap(drv.pickerContainer);
+        await tester.pumpAndSettle();
+        await tester.tap(drv.pickerItemIndexContainer(0));
+        await tester.pumpAndSettle();
+
+        expect(drv.pickerTextFieldWidget.controller!.text, '');
+      });
+
+      testWidgets("should remove the controller's selected value field on item reselection", (tester) async {
+        drv = await PicoloTestDriver(tester) //
+            .withPicker()
+            .withController(1)
+            .withRemoveSelectionOnReselect()
+            .pumpPicolo();
+
+        expect(drv.controller!.selectedValue, 1);
+
+        await tester.tap(drv.pickerContainer);
+        await tester.pumpAndSettle();
+        await tester.tap(drv.pickerItemIndexContainer(0));
+        await tester.pumpAndSettle();
+
+        expect(drv.controller!.selectedValue, null);
       });
     });
 

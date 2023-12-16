@@ -42,8 +42,10 @@ class PicoloPickerItem<T> extends StatelessWidget {
     required BuildContext context,
     required PicoloContext<T> picoloContext,
   }) {
-    picoloContext.controller.selectedValue = item.value;
-    picoloContext.onSelect?.call(item.value);
+    final bool shouldRemoveItem = picoloContext.removeSelectionOnReselect && picoloContext.controller.selectedValue == item.value;
+    final T? value = shouldRemoveItem ? null : item.value;
+    picoloContext.controller.selectedValue = value;
+    picoloContext.onSelect?.call(value);
     Navigator.pop(context);
   }
 
