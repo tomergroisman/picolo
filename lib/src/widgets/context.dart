@@ -24,7 +24,6 @@ class PicoloContext<T> extends InheritedWidget {
     this.onClosed,
     this.onSelect,
     this.pickerInputDecoration,
-    T? initialValue,
   }) : labelByValue = {for (var item in items) item.value: item.label};
 
   final PicoloController<T> controller;

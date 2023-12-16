@@ -49,17 +49,11 @@ class _PicoloState<T> extends State<Picolo<T>> {
   late final PicoloController<T> controller = widget.controller ?? PicoloController<T>(widget.initialValue);
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return PicoloContext<T>(
       controller: controller,
       customPicker: widget.customPicker,
       dialogBorderRadius: widget.dialogBorderRadius,
-      initialValue: widget.initialValue,
       items: widget.items,
       itemPadding: widget.itemPadding,
       itemSelectedColor: widget.itemSelectedColor ?? Theme.of(context).primaryColor,
