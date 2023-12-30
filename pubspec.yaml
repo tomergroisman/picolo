@@ -1,6 +1,6 @@
 name: picolo
-description: "Picker component for Flutter applications."
-version: 1.0.0
+description: "Simplify value picking in Flutter apps with a customizable widget."
+version: 1.1.0
 repository: https://github.com/tomergroisman/picolo.git
 
 environment:

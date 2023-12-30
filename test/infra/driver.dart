@@ -47,6 +47,15 @@ class PicoloTestDriver with PicoloTestFinders {
     return this;
   }
 
+  PicoloTestDriver withThreeItemPicker() {
+    _items = const [
+      PicoloItem(label: 'One', value: 1),
+      PicoloItem(label: 'Two', value: 2),
+      PicoloItem(label: 'Three', value: 3),
+    ];
+    return this;
+  }
+
   PicoloTestDriver withCustomPicker() {
     _items = const [
       PicoloItem(label: 'One', value: 1),

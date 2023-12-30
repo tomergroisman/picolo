@@ -15,6 +15,7 @@ class PicoloDialogKeys {
 
 class PicoloPickerItemKeys {
   static const Key container = Key('picolo.picker-item.container');
+  static const Key ink = Key('picolo.picker-item.ink');
   static const Key label = Key('picolo.picker-item.label');
   static const Key selectedIcon = Key('picolo.picker-item.selected-icon');
 }
