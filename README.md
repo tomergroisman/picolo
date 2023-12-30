@@ -1,6 +1,6 @@
 # Picolo Flutter Package
 
-![Alt Text](./docs/demo.gif)
+![Alt Text](doc/demo.gif)
 
 
 

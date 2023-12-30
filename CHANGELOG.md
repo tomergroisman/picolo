@@ -2,19 +2,18 @@
 
 All notable changes to the "Picolo" Flutter package will be documented in this file.
 
-## [1.0.0] - Initial Release
+## Version 1.1.0
 
 ### Added
-- CI/CD Integration (GitHub Actions)
-- Example app
-- Tests
-- Picolo UI and business logic
+- Example GIF to `README.md`
 
 ### Changed
-- None
+- Add `example` to package contents
+- Formatting
 
 ### Fixed
-- None
+- Splash border radius for `PicoloItem`
+- `PicoloDialog` padding
 
 ### Contributors
 - [@tomergroisman](https://github.com/tomergroisman)
