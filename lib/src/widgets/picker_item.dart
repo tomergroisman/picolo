@@ -8,11 +8,31 @@ class PicoloPickerItem<T> extends StatelessWidget {
   const PicoloPickerItem({
     super.key,
     required this.item,
+    required this.isFirst,
+    required this.isLast,
     required this.isSelected,
   });
 
   final PicoloItem<T> item;
   final bool isSelected;
+  final bool isFirst;
+  final bool isLast;
+
+  BorderRadius? getBorderRadius(PicoloContext<T> picoloContext) {
+    if (isFirst) {
+      return picoloContext.dialogBorderRadius.copyWith(
+        bottomLeft: const Radius.circular(0.0),
+        bottomRight: const Radius.circular(0.0),
+      );
+    }
+    if (isLast) {
+      return picoloContext.dialogBorderRadius.copyWith(
+        topRight: const Radius.circular(0.0),
+        topLeft: const Radius.circular(0.0),
+      );
+    }
+    return null;
+  }
 
   Widget renderMainPart(PicoloContext<T> picoloContext) {
     return Expanded(
@@ -42,7 +62,8 @@ class PicoloPickerItem<T> extends StatelessWidget {
     required BuildContext context,
     required PicoloContext<T> picoloContext,
   }) {
-    final bool shouldRemoveItem = picoloContext.removeSelectionOnReselect && picoloContext.controller.selectedValue == item.value;
+    final bool shouldRemoveItem = picoloContext.removeSelectionOnReselect &&
+        picoloContext.controller.selectedValue == item.value;
     final T? value = shouldRemoveItem ? null : item.value;
     picoloContext.controller.selectedValue = value;
     picoloContext.onSelect?.call(value);
@@ -52,10 +73,13 @@ class PicoloPickerItem<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     PicoloContext<T> picoloContext = PicoloContext.get<T>();
+    BorderRadius? borderRadius = getBorderRadius(picoloContext);
     return Material(
       key: PicoloPickerItemKeys.container,
-      borderRadius: picoloContext.dialogBorderRadius,
+      borderRadius: borderRadius,
       child: InkWell(
+        key: PicoloPickerItemKeys.ink,
+        borderRadius: borderRadius,
         onTap: () {
           handleSelect(
             context: context,

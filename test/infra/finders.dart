@@ -30,6 +30,8 @@ mixin class PicoloTestFinders {
   // Item finders
   Finder get pickerItemContainer => find.byKey(PicoloPickerItemKeys.container);
 
+  Finder get pickerItemInk => find.byKey(PicoloPickerItemKeys.ink);
+
   Finder get pickerItemLabel => find.byKey(PicoloPickerItemKeys.label);
 
   Finder get pickerItemSelectedIcon => find.byKey(PicoloPickerItemKeys.selectedIcon);
@@ -43,9 +45,14 @@ mixin class PicoloTestFinders {
         matching: pickerItemSelectedIcon,
       );
 
-  BorderRadius get pickerItemBorderRadius {
-    final Material container = pickerItemContainer.evaluate().first.widget as Material;
-    return container.borderRadius as BorderRadius;
+  BorderRadius? pickerItemBorderRadius(int index) {
+    final Material container = pickerItemContainer.evaluate().toList()[index].widget as Material;
+    return container.borderRadius as BorderRadius?;
+  }
+
+  BorderRadius? pickerItemInkBorderRadius(int index) {
+    final InkWell container = pickerItemInk.evaluate().toList()[index].widget as InkWell;
+    return container.borderRadius;
   }
 
   Padding get pickerItemPadding {

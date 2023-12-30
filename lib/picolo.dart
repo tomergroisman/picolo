@@ -25,8 +25,10 @@ class Picolo<T> extends StatefulWidget {
     BorderRadius? dialogBorderRadius,
     EdgeInsets? itemPadding,
     bool? removeSelectionOnReselect,
-  })  : dialogBorderRadius = dialogBorderRadius ?? const BorderRadius.all(Radius.circular(12.0)),
-        itemPadding = itemPadding ?? const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+  })  : dialogBorderRadius =
+            dialogBorderRadius ?? const BorderRadius.all(Radius.circular(16.0)),
+        itemPadding = itemPadding ??
+            const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
         removeSelectionOnReselect = removeSelectionOnReselect ?? false;
 
   final BorderRadius dialogBorderRadius;
@@ -46,7 +48,8 @@ class Picolo<T> extends StatefulWidget {
 }
 
 class _PicoloState<T> extends State<Picolo<T>> {
-  late final PicoloController<T> controller = widget.controller ?? PicoloController<T>(widget.initialValue);
+  late final PicoloController<T> controller =
+      widget.controller ?? PicoloController<T>(widget.initialValue);
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +59,8 @@ class _PicoloState<T> extends State<Picolo<T>> {
       dialogBorderRadius: widget.dialogBorderRadius,
       items: widget.items,
       itemPadding: widget.itemPadding,
-      itemSelectedColor: widget.itemSelectedColor ?? Theme.of(context).primaryColor,
+      itemSelectedColor:
+          widget.itemSelectedColor ?? Theme.of(context).primaryColor,
       onClosed: widget.onClosed,
       onSelect: widget.onSelect,
       pickerInputDecoration: widget.pickerInputDecoration,

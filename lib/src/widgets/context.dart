@@ -6,7 +6,10 @@ import 'package:picolo/src/models/picolo_item.dart';
 
 class PicoloContext<T> extends InheritedWidget {
   static PicoloContext<T> get<T>() {
-    final PicoloContext<T>? result = PicoloKeys.globalKey.currentContext?.dependOnInheritedWidgetOfExactType<PicoloContext<T>>();
+    final PicoloContext<T>? result = PicoloKeys //
+        .globalKey
+        .currentContext
+        ?.dependOnInheritedWidgetOfExactType<PicoloContext<T>>();
     assert(result != null, 'No PicoloContext found in context');
     return result!;
   }

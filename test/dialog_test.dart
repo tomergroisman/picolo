@@ -105,7 +105,7 @@ void main() {
     group("Customization", () {
       group("Dialog Border Radius", () {
         testWidgets('should render a dialog with a default dialog border radius', (tester) async {
-          const double defaultBorderRadius = 12.0;
+          const double defaultBorderRadius = 16.0;
 
           drv = await PicoloTestDriver(tester) //
               .withPicker()
@@ -125,24 +125,24 @@ void main() {
         });
 
         testWidgets('should render a dialog with a custom dialog border radius', (tester) async {
-          const double borderRadius = 50.0;
+          const double customBorderRadius = 50.0;
 
           drv = await PicoloTestDriver(tester) //
               .withPicker()
-              .withCustomDialogBorderRadius(borderRadius)
+              .withCustomDialogBorderRadius(customBorderRadius)
               .pumpPicolo();
 
           await tester.tap(drv.pickerContainer);
           await tester.pumpAndSettle();
 
-          expect(drv.dialogBorderRadius.bottomLeft.x, borderRadius);
-          expect(drv.dialogBorderRadius.bottomLeft.y, borderRadius);
-          expect(drv.dialogBorderRadius.bottomRight.x, borderRadius);
-          expect(drv.dialogBorderRadius.bottomRight.y, borderRadius);
-          expect(drv.dialogBorderRadius.topLeft.x, borderRadius);
-          expect(drv.dialogBorderRadius.topLeft.y, borderRadius);
-          expect(drv.dialogBorderRadius.topRight.x, borderRadius);
-          expect(drv.dialogBorderRadius.topRight.y, borderRadius);
+          expect(drv.dialogBorderRadius.bottomLeft.x, customBorderRadius);
+          expect(drv.dialogBorderRadius.bottomLeft.y, customBorderRadius);
+          expect(drv.dialogBorderRadius.bottomRight.x, customBorderRadius);
+          expect(drv.dialogBorderRadius.bottomRight.y, customBorderRadius);
+          expect(drv.dialogBorderRadius.topLeft.x, customBorderRadius);
+          expect(drv.dialogBorderRadius.topLeft.y, customBorderRadius);
+          expect(drv.dialogBorderRadius.topRight.x, customBorderRadius);
+          expect(drv.dialogBorderRadius.topRight.y, customBorderRadius);
         });
       });
     });

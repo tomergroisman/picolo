@@ -40,44 +40,102 @@ void main() {
     group("Customization", () {
       group("Item Border Radius", () {
         testWidgets('should render a picker item with a default dialog border radius', (tester) async {
-          const double defaultBorderRadius = 12.0;
+          const double defaultBorderRadius = 16.0;
 
           drv = await PicoloTestDriver(tester) //
               .withPicker()
+              .withThreeItemPicker()
               .pumpPicolo();
 
           await tester.tap(drv.pickerContainer);
           await tester.pumpAndSettle();
 
-          expect(drv.pickerItemBorderRadius.bottomLeft.x, defaultBorderRadius);
-          expect(drv.pickerItemBorderRadius.bottomLeft.y, defaultBorderRadius);
-          expect(drv.pickerItemBorderRadius.bottomRight.x, defaultBorderRadius);
-          expect(drv.pickerItemBorderRadius.bottomRight.y, defaultBorderRadius);
-          expect(drv.pickerItemBorderRadius.topLeft.x, defaultBorderRadius);
-          expect(drv.pickerItemBorderRadius.topLeft.y, defaultBorderRadius);
-          expect(drv.pickerItemBorderRadius.topRight.x, defaultBorderRadius);
-          expect(drv.pickerItemBorderRadius.topRight.y, defaultBorderRadius);
+          expect(drv.pickerItemBorderRadius(0)?.bottomLeft.x, 0.0);
+          expect(drv.pickerItemBorderRadius(0)?.bottomLeft.y, 0.0);
+          expect(drv.pickerItemBorderRadius(0)?.bottomRight.x, 0.0);
+          expect(drv.pickerItemBorderRadius(0)?.bottomRight.y, 0.0);
+          expect(drv.pickerItemBorderRadius(0)?.topLeft.x, defaultBorderRadius);
+          expect(drv.pickerItemBorderRadius(0)?.topLeft.y, defaultBorderRadius);
+          expect(drv.pickerItemBorderRadius(0)?.topRight.x, defaultBorderRadius);
+          expect(drv.pickerItemBorderRadius(0)?.topRight.y, defaultBorderRadius);
+          expect(drv.pickerItemInkBorderRadius(0)?.bottomLeft.x, 0.0);
+          expect(drv.pickerItemInkBorderRadius(0)?.bottomLeft.y, 0.0);
+          expect(drv.pickerItemInkBorderRadius(0)?.bottomRight.x, 0.0);
+          expect(drv.pickerItemInkBorderRadius(0)?.bottomRight.y, 0.0);
+          expect(drv.pickerItemInkBorderRadius(0)?.topLeft.x, defaultBorderRadius);
+          expect(drv.pickerItemInkBorderRadius(0)?.topLeft.y, defaultBorderRadius);
+          expect(drv.pickerItemInkBorderRadius(0)?.topRight.x, defaultBorderRadius);
+          expect(drv.pickerItemInkBorderRadius(0)?.topRight.y, defaultBorderRadius);
+
+          expect(drv.pickerItemBorderRadius(1), null);
+          expect(drv.pickerItemInkBorderRadius(1), null);
+
+          expect(drv.pickerItemBorderRadius(2)?.bottomLeft.x, defaultBorderRadius);
+          expect(drv.pickerItemBorderRadius(2)?.bottomLeft.y, defaultBorderRadius);
+          expect(drv.pickerItemBorderRadius(2)?.bottomRight.x, defaultBorderRadius);
+          expect(drv.pickerItemBorderRadius(2)?.bottomRight.y, defaultBorderRadius);
+          expect(drv.pickerItemBorderRadius(2)?.topLeft.x, 0.0);
+          expect(drv.pickerItemBorderRadius(2)?.topLeft.y, 0.0);
+          expect(drv.pickerItemBorderRadius(2)?.topRight.x, 0.0);
+          expect(drv.pickerItemBorderRadius(2)?.topRight.y, 0.0);
+          expect(drv.pickerItemInkBorderRadius(2)?.bottomLeft.x, defaultBorderRadius);
+          expect(drv.pickerItemInkBorderRadius(2)?.bottomLeft.y, defaultBorderRadius);
+          expect(drv.pickerItemInkBorderRadius(2)?.bottomRight.x, defaultBorderRadius);
+          expect(drv.pickerItemInkBorderRadius(2)?.bottomRight.y, defaultBorderRadius);
+          expect(drv.pickerItemInkBorderRadius(2)?.topLeft.x, 0.0);
+          expect(drv.pickerItemInkBorderRadius(2)?.topLeft.y, 0.0);
+          expect(drv.pickerItemInkBorderRadius(2)?.topRight.x, 0.0);
+          expect(drv.pickerItemInkBorderRadius(2)?.topRight.y, 0.0);
         });
 
         testWidgets('should render a dialog with a custom dialog border radius', (tester) async {
-          const double borderRadius = 50.0;
+          const double customBorderRadius = 50.0;
 
           drv = await PicoloTestDriver(tester) //
               .withPicker()
-              .withCustomDialogBorderRadius(borderRadius)
+              .withThreeItemPicker()
+              .withCustomDialogBorderRadius(customBorderRadius)
               .pumpPicolo();
 
           await tester.tap(drv.pickerContainer);
           await tester.pumpAndSettle();
 
-          expect(drv.pickerItemBorderRadius.bottomLeft.x, borderRadius);
-          expect(drv.pickerItemBorderRadius.bottomLeft.y, borderRadius);
-          expect(drv.pickerItemBorderRadius.bottomRight.x, borderRadius);
-          expect(drv.pickerItemBorderRadius.bottomRight.y, borderRadius);
-          expect(drv.pickerItemBorderRadius.topLeft.x, borderRadius);
-          expect(drv.pickerItemBorderRadius.topLeft.y, borderRadius);
-          expect(drv.pickerItemBorderRadius.topRight.x, borderRadius);
-          expect(drv.pickerItemBorderRadius.topRight.y, borderRadius);
+          expect(drv.pickerItemBorderRadius(0)?.bottomLeft.x, 0.0);
+          expect(drv.pickerItemBorderRadius(0)?.bottomLeft.y, 0.0);
+          expect(drv.pickerItemBorderRadius(0)?.bottomRight.x, 0.0);
+          expect(drv.pickerItemBorderRadius(0)?.bottomRight.y, 0.0);
+          expect(drv.pickerItemBorderRadius(0)?.topLeft.x, customBorderRadius);
+          expect(drv.pickerItemBorderRadius(0)?.topLeft.y, customBorderRadius);
+          expect(drv.pickerItemBorderRadius(0)?.topRight.x, customBorderRadius);
+          expect(drv.pickerItemBorderRadius(0)?.topRight.y, customBorderRadius);
+          expect(drv.pickerItemInkBorderRadius(0)?.bottomLeft.x, 0.0);
+          expect(drv.pickerItemInkBorderRadius(0)?.bottomLeft.y, 0.0);
+          expect(drv.pickerItemInkBorderRadius(0)?.bottomRight.x, 0.0);
+          expect(drv.pickerItemInkBorderRadius(0)?.bottomRight.y, 0.0);
+          expect(drv.pickerItemInkBorderRadius(0)?.topLeft.x, customBorderRadius);
+          expect(drv.pickerItemInkBorderRadius(0)?.topLeft.y, customBorderRadius);
+          expect(drv.pickerItemInkBorderRadius(0)?.topRight.x, customBorderRadius);
+          expect(drv.pickerItemInkBorderRadius(0)?.topRight.y, customBorderRadius);
+
+          expect(drv.pickerItemBorderRadius(1), null);
+          expect(drv.pickerItemInkBorderRadius(1), null);
+
+          expect(drv.pickerItemBorderRadius(2)?.bottomLeft.x, customBorderRadius);
+          expect(drv.pickerItemBorderRadius(2)?.bottomLeft.y, customBorderRadius);
+          expect(drv.pickerItemBorderRadius(2)?.bottomRight.x, customBorderRadius);
+          expect(drv.pickerItemBorderRadius(2)?.bottomRight.y, customBorderRadius);
+          expect(drv.pickerItemBorderRadius(2)?.topLeft.x, 0.0);
+          expect(drv.pickerItemBorderRadius(2)?.topLeft.y, 0.0);
+          expect(drv.pickerItemBorderRadius(2)?.topRight.x, 0.0);
+          expect(drv.pickerItemBorderRadius(2)?.topRight.y, 0.0);
+          expect(drv.pickerItemInkBorderRadius(2)?.bottomLeft.x, customBorderRadius);
+          expect(drv.pickerItemInkBorderRadius(2)?.bottomLeft.y, customBorderRadius);
+          expect(drv.pickerItemInkBorderRadius(2)?.bottomRight.x, customBorderRadius);
+          expect(drv.pickerItemInkBorderRadius(2)?.bottomRight.y, customBorderRadius);
+          expect(drv.pickerItemInkBorderRadius(2)?.topLeft.x, 0.0);
+          expect(drv.pickerItemInkBorderRadius(2)?.topLeft.y, 0.0);
+          expect(drv.pickerItemInkBorderRadius(2)?.topRight.x, 0.0);
+          expect(drv.pickerItemInkBorderRadius(2)?.topRight.y, 0.0);
         });
       });
 
