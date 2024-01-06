@@ -2,18 +2,16 @@
 
 All notable changes to the "Picolo" Flutter package will be documented in this file.
 
-## Version 1.1.0
+## Version 1.2.0
 
 ### Added
-- Example GIF to `README.md`
+- None
 
 ### Changed
-- Add `example` to package contents
-- Formatting
+- Update `README.md` and package description
 
 ### Fixed
-- Splash border radius for `PicoloItem`
-- `PicoloDialog` padding
+- None
 
 ### Contributors
 - [@tomergroisman](https://github.com/tomergroisman)
