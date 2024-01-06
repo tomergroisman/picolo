@@ -1,6 +1,6 @@
 name: picolo
-description: "Simplify value picking in Flutter apps with a customizable widget."
-version: 1.1.0
+description: "Zero-dependency customizable dialog picker widget for Flutter application."
+version: 1.2.0
 repository: https://github.com/tomergroisman/picolo.git
 
 environment:

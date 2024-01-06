@@ -1,8 +1,8 @@
 # Picolo Flutter Package
 
-![Alt Text](doc/demo.gif)
+[![pub package](https://img.shields.io/pub/v/picolo.svg)](https://pub.dev/packages/picolo)
 
-
+![demo](https://github.com/tomergroisman/picolo/blob/master/doc/demo.gif?raw=true)
 
 Picolo is a versatile and customizable dialog picker for Flutter applications. It provides an easy-to-use widget that allows you to integrate a sleek and efficient picker dialog into your application with minimal effort. Whether you need a simple selection mechanism or a more complex picker, Picolo has you covered.
 
